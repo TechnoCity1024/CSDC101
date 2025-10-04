@@ -9,7 +9,9 @@ int main() {
 
     if (temperature >= 30) {
         cout << "You received a 20 percent discount!" << endl;
-    } else {
+    }
+    
+    else {
         cout << "You didn't receive a 20 percent discount!" << endl;
     }
 
