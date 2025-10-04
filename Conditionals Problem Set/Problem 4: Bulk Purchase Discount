@@ -1,0 +1,30 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    int cups;
+    double pricePerCup = 1.0;
+    double totalCost, discount;
+    
+    cout << "How many cups? ";
+    cin >> cups;
+    
+    totalCost = cups * pricePerCup;
+
+    if (cups <= 4) {
+        discount = 0.0;
+    }
+    
+    else if (cups <= 9) {
+        discount = 0.10;
+    }
+    
+    else {
+        discount = 0.20;
+    }
+    
+    totalCost = totalCost - (totalCost * discount);
+    cout << "Total Cost: $" << totalCost << endl;
+
+    return 0;
+}
