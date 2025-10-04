@@ -1,1 +1,23 @@
+#include <iostream>
+using namespace std;
 
+int main() {
+    int lemon;
+    int sugar;
+    
+    cout << "Enter the amount of lemon: ";
+    cin >> lemon;
+    
+    cout << "Enter the amount of sugar: ";
+    cin >> sugar;
+    
+    if (lemon > 0 && sugar > 0) {
+        cout << "You're ready to sell lemonade!" << endl;
+    }
+    
+    else {
+        cout << "You can't make lemonade!" << endl;
+    }
+
+    return 0;
+}
