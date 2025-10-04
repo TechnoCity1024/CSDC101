@@ -1,1 +1,17 @@
+#include <iostream>
+using namespace std;
 
+int main() {
+    int temperature;
+    
+    cout << "Enter the temperature today: ";
+    cin >> temperature;
+
+    if (temperature >= 30) {
+        cout << "You received a 20 percent discount!" << endl;
+    } else {
+        cout << "You didn't receive a 20 percent discount!" << endl;
+    }
+
+    return 0;
+}
