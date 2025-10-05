@@ -1,28 +1,25 @@
 #include <iostream>
 #include <cctype>
-#include <limits>
 using namespace std;
 
 void problem1() {
     double money;
     cout << "Enter your money: ";
     cin >> money;
-    int canBuy = (money >= 1.0);
-    switch (canBuy) {
-        case 1: cout << "Enjoy your lemonade!" << endl; break;
-        default: cout << "Sorry, you need more money." << endl; break;
-    }
+    if (money >= 1.0)
+    cout << "Enjoy your lemonade!" << endl;
+    else
+    cout << "Sorry, you need more money." << endl;
 }
 
 void problem2() {
     int temperature;
     cout << "Enter the temperature today: ";
     cin >> temperature;
-    int hot = (temperature >= 30);
-    switch (hot) {
-        case 1: cout << "You received a 20 percent discount!" << endl; break;
-        default: cout << "You didn't receive a 20 percent discount!" << endl; break;
-    }
+    if (temperature >= 30)
+    cout << "You received a 20 percent discount!" << endl;
+    else
+    cout << "You didn't receive a 20 percent discount!" << endl;
 }
 
 void problem3() {
@@ -32,36 +29,27 @@ void problem3() {
     cin >> lemon;
     cout << "Enter the amount of sugar: ";
     cin >> sugar;
-    int ready = (lemon > 0 && sugar > 0);
-    switch (ready) {
-        case 1: cout << "You're ready to sell lemonade!" << endl; break;
-        default: cout << "You can't make lemonade!" << endl; break;
-    }
+    if (lemon > 0 && sugar > 0)
+    cout << "You're ready to sell lemonade!" << endl;
+    else
+    cout << "You can't make lemonade!" << endl;
 }
 
 void problem4() {
     int cups;
+    double pricePerCup = 1.0;
+    double totalCost, discount;
     cout << "How many cups? ";
     cin >> cups;
-    int category;
-    if (cups <= 4) category = 0;
-    else if (cups <= 9) category = 1;
-    else category = 2;
-
-    int discountPercent;
-    switch (category) {
-        case 0: discountPercent = 0; break;
-        case 1: discountPercent = 10; break;
-        default: discountPercent = 20; break;
-    }
-
-    int totalCents = cups * 100;
-    totalCents = totalCents * (100 - discountPercent) / 100;
-    int dollars = totalCents / 100;
-    int cents = totalCents % 100;
-    cout << "Total Cost: $" << dollars << ".";
-    if (cents < 10) cout << "0";
-    cout << cents << endl;
+    totalCost = cups * pricePerCup;
+    if (cups <= 4)
+    discount = 0.0;
+    else if (cups <= 9)
+    discount = 0.10;
+    else
+    discount = 0.20;
+    totalCost = totalCost - (totalCost * discount);
+    cout << "Total Cost: $" << totalCost << endl;
 }
 
 void problem5() {
@@ -72,13 +60,19 @@ void problem5() {
     while (true) {
         cout << "\nEnter Move: ";
         cin >> move;
-        switch (toupper(move)) {
+        char m = toupper(static_cast<unsigned char>(move));
+        if (m == 'Q') {
+            cout << "Game Over!" << endl;
+            break;
+        }
+        switch (m) {
             case 'W': y += 1; break;
             case 'S': y -= 1; break;
             case 'D': x += 1; break;
             case 'A': x -= 1; break;
-            case 'Q': cout << "Game Over!" << endl; return;
-            default: cout << "Invalid key! Use W/A/S/D to move or Q to quit." << endl; continue;
+            default:
+                cout << "Invalid key! Use W/A/S/D to move or Q to quit." << endl;
+                continue;
         }
         cout << "Current position: (" << x << ", " << y << ")" << endl;
     }
@@ -86,36 +80,42 @@ void problem5() {
 
 int main() {
     int choice;
-    while (true) {
-        cout << "\nMenu (enter number):" << endl;
-        cout << "1 - Basic Pricing Decision" << endl;
-        cout << "2 - Weather-Based Discounts" << endl;
-        cout << "3 - Inventory Check" << endl;
-        cout << "4 - Bulk Purchase Discount" << endl;
-        cout << "5 - Player Movement (continuous)" << endl;
-        cout << "0 - Quit" << endl;
-        cout << "Choice: ";
+    cout << "\nMenu (enter number):" << endl;
+    cout << "1 - Basic Pricing Decision" << endl;
+    cout << "2 - Weather-Based Discounts" << endl;
+    cout << "3 - Inventory Check" << endl;
+    cout << "4 - Bulk Purchase Discount" << endl;
+    cout << "5 - Player Movement" << endl;
+    cout << "0 - Quit" << endl;
+    cout << "Choice: ";
+    if (!(cin >> choice)) {
+        cout << "Invalid input. Exiting." << endl;
+        return 0;
+    }
 
-        if (!(cin >> choice)) {
-            cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            cout << "Invalid input. Please enter a number." << endl;
-            continue;
-        }
-
-        if (choice == 0) {
+    switch (choice) {
+        case 1:
+            problem1();
+            break;
+        case 2:
+            problem2();
+            break;
+        case 3:
+            problem3();
+            break;
+        case 4:
+            problem4();
+            break;
+        case 5:
+            problem5();
+            break;
+        case 0:
             cout << "Exiting. Goodbye!" << endl;
             break;
-        }
-
-        switch (choice) {
-            case 1: problem1(); break;
-            case 2: problem2(); break;
-            case 3: problem3(); break;
-            case 4: problem4(); break;
-            case 5: problem5(); break;
-            default: cout << "Invalid choice. Please enter a number from 0 to 5." << endl; break;
-        }
+        default:
+            cout << "Invalid choice. Please run the program again and enter 0-5." << endl;
+            break;
     }
+
     return 0;
 }
